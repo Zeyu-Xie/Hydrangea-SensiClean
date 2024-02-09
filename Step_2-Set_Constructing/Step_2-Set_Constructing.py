@@ -3,12 +3,12 @@ import os
 import sys
 
 # Const
-chr_range = 55296
+chr_range_list = list(range(1, 55296))+list(range(57344, 65536))
 
 # Function 1: Write into the JSON File
 def write_file():
     tmp_list = {}
-    for i in range(1, chr_range):
+    for i in chr_range_list:
         tmp_list[chr(i)] = list(chr_list[chr(i)])
     str = json.dumps(tmp_list, ensure_ascii=False, indent=4)
     with open(os.path.join(os.path.abspath(os.path.dirname(__file__)), "Step_2-Set_Constructing.json"), "w") as file:
@@ -24,7 +24,7 @@ with open(os.path.join(os.path.abspath(os.path.dirname(__file__)), "Step_2-Set_C
         print("ERROR", type(e), e)
         chr_list = {}
     file.close()
-for i in range(1, chr_range):
+for i in chr_range_list:
     if chr(i) not in chr_list:
         print(f"Ading \"{chr(i)}\" (unicode {i}) into chr_list")
         chr_list[chr(i)] = set()
@@ -44,7 +44,7 @@ except Exception as e:
     tot = 1
 
 # Editing Set Data
-while tot < chr_range:
+while tot in chr_range_list:
 
     chr_tot = chr(tot)
     chr_tot_list = chr_list[chr_tot]
