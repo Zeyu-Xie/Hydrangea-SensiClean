@@ -68,6 +68,10 @@ while tot in chr_range_list:
         elif chr_input == "exit":
             write_file()
             sys.exit(0)
+        # Input "pre": Previous
+        elif chr_input == "pre":
+            tot -= 2
+            break
         # Self?
         elif chr_input == chr_tot:
             print("Self, Repeated")
