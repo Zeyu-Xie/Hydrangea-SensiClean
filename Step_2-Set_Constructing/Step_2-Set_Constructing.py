@@ -3,7 +3,7 @@ import os
 import sys
 
 # Const
-chr_range_list = list(range(1, 55296))+list(range(57344, 65536))
+chr_range_list = list(range(1, 55296))+list(range(57344, 1114112))
 
 # Function 1: Write into the JSON File
 def write_file():
