@@ -60,11 +60,12 @@ def print_list(_key):
 
 # Main Part
 if __name__ == "__main__":
-    
+
     while 1:
         print("0. Exit")
         print("1. Append Connection")
         print("2. List Query")
+        print("3. List Multiple Connections")
         tmp_1 = input("Choose what you want to do: ")
         try:
             tmp_1 = int(tmp_1)
@@ -112,3 +113,12 @@ if __name__ == "__main__":
                     continue
                 else:
                     print_list(_key)
+        elif tmp_1 == 3:
+            while 1:
+                print("Please input your relative character set")
+                _key = input("")
+                if _key == "exit":
+                    break
+                else:
+                    _key = list(_key)
+                    print(_key)
