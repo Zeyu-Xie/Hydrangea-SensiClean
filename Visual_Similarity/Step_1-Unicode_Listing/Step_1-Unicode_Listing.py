@@ -1,16 +1,18 @@
 import json
 import os
 
-str = []
+if __name__ == "__main__":
 
-for i in range(1, 18384):
-    str.append(chr(i))
+    str = []
 
-json_str = json.dumps(str, ensure_ascii = False, indent = 4)
+    for i in range(1, 18384):
+        str.append(chr(i))
 
-print(json_str)
+    json_str = json.dumps(str, ensure_ascii = False, indent = 4)
 
-print(os.path.abspath(os.path.dirname(__file__)))
+    print(json_str)
 
-with open(os.path.join(os.path.abspath(os.path.dirname(__file__)), "Step_1-Unicode_Listing.json"), "w") as file:
-    file.write(json_str)
+    print(os.path.abspath(os.path.dirname(__file__)))
+
+    with open(os.path.join(os.path.abspath(os.path.dirname(__file__)), "Step_1-Unicode_Listing.json"), "w") as file:
+        file.write(json_str)
