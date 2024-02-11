@@ -121,4 +121,9 @@ if __name__ == "__main__":
                     break
                 else:
                     _key = list(_key)
-                    print(_key)
+                    for i in _key:
+                        if i != _key[0]:
+                            _append(i, _key[0])
+                    for i in _key:
+                        print_list(i)
+                    write_file()
