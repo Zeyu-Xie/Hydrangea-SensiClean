@@ -4,10 +4,11 @@ import json
 
 # Const
 chr_range_list = list(range(1, 55296))+list(range(57344, 1114112))
+data_path = os.path.join(os.path.dirname(__file__), "data.json")
 
 # Initialize chr_list
 chr_list = {}
-with open(os.path.join(os.path.dirname(__file__), "data.json"), "r") as file:
+with open(data_path, "r") as file:
     try:
         chr_list = json.loads(file.read())
     except Exception as e:
@@ -47,7 +48,7 @@ def write_file():
     for i in chr_range_list:
         tmp_list[chr(i)] = list(chr_list[chr(i)])
     str = json.dumps(tmp_list, ensure_ascii=False, indent=4)
-    with open(os.path.join(os.path.dirname(__file__), "data.json"), "w") as file:
+    with open(data_path, "w") as file:
         file.write(str)
         file.close()
 
@@ -64,7 +65,8 @@ if __name__ == "__main__":
     while 1:
         print("0. Exit")
         print("1. Edit")
-        print("2. Query")
+        print("2. Discard")
+        print("3. Query")
         tmp_1 = input("Choose what you want to do: ")
         try:
             tmp_1 = int(tmp_1)
@@ -91,8 +93,24 @@ if __name__ == "__main__":
                     for i in _key:
                         print_list(i)
                     write_file()
-        # Query
+        # Discard
         elif tmp_1 == 2:
+            while 1:
+                _key = input("Which character do you want to discard? ")
+                if _key == "exit":
+                    break
+                elif _key not in chr_list:
+                    print("Character Not Found")
+                    continue
+                else:
+                    for i in chr_list[_key]:
+                        chr_list[i].discard(_key)
+                        print_list(i)
+                    chr_list[_key] = set()
+                    print_list(_key)
+                    write_file()
+        # Query
+        elif tmp_1 == 3:
             while 1:
                 _key = input("Input the key: ")
                 if _key == "exit":
