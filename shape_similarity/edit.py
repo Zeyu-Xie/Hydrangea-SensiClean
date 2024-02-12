@@ -78,13 +78,13 @@ if __name__ == "__main__":
         print("0. Exit")
         print("1. Append")
         print("2. Discard")
-        print("3. Backward")
+        print("3. Backward (Not Available)")
         print("4. Query")
-        tmp_1 = input("Choose what you want to do: ")
+        tmp_1 = input("- Choose what you want to do: ")
         try:
             tmp_1 = int(tmp_1)
         except Exception as e:
-            print("ERROR", type(e), e)
+            print("ERROR:", type(e), e)
             sys.exit(1)
 
         # Exit
@@ -94,7 +94,7 @@ if __name__ == "__main__":
         # Append Connection
         elif tmp_1 == 1:
             while 1:
-                print("Please input your relative character set")
+                print("- Please input your relative character set")
                 _key = input("")
                 if _key == "exit":
                     break
@@ -109,11 +109,11 @@ if __name__ == "__main__":
         # Discard
         elif tmp_1 == 2:
             while 1:
-                _key = input("Which character do you want to discard? ")
+                _key = input("- Which character do you want to discard? ")
                 if _key == "exit":
                     break
                 elif _key not in chr_list:
-                    print("Character Not Found")
+                    print("ERROR: Character Not Found")
                     continue
                 else:
                     for i in chr_list[_key]:
@@ -130,11 +130,11 @@ if __name__ == "__main__":
         # Query
         elif tmp_1 == 4:
             while 1:
-                _key = input("Input the key: ")
+                _key = input("- Input the key: ")
                 if _key == "exit":
                     break
                 elif _key not in chr_list:
-                    print("Wrong Key")
+                    print("ERROR: Wrong Key")
                     continue
                 else:
                     print_list(_key)
