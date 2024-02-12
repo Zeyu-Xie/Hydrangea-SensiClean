@@ -8,7 +8,7 @@ if [ "$result" = "" ]; then
     echo -n "- Do you want to build the image now? (Y/N) "
     read option
     if [ "$option" = "Y" ] || [ "$option" = "y" ]; then
-        docker build -t hydrangea-sensiclean .
+        docker build -t hydrangea-sensiclean $(dirname $0)
     else
         echo "You have canceled to build the image."
     fi
