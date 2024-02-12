@@ -23,7 +23,7 @@ else
     echo -e -n "- Please choose your option (1-3): "
     read option
     if [ "$option" = "1" ]; then
-        docker run -i -t $result
+        docker run -i -v $(dirname $0)/pronounciation_similarity/data.json:/Hydrangea-SensiClean/pronounciation_similarity/data.json -v $(dirname $0)/shape_similarity/data.json:/Hydrangea-SensiClean/shape_similarity/data.json -t $result
     elif [ "$option" = "2" ]; then
         docker rmi -f $result
         echo "Image $result has been removed."
