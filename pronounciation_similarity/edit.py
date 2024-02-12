@@ -23,9 +23,11 @@ for i in chr_range_list:
         chr_list[chr(i)] = set()
     else:
         chr_list[chr(i)] = set(chr_list[chr(i)])
+chr_list_backward = chr_list
 
 # Function 1: Append
 def _append(key, value):
+    global chr_list
     chr_list[key].add(value)
     chr_list[value].add(key)
     for i in chr_list[value]:
@@ -44,6 +46,9 @@ def _append(key, value):
 
 # Function 2: Write into the JSON File
 def write_file():
+    global chr_list_backward
+    global chr_list
+    chr_list_backward = chr_list
     tmp_list = {}
     for i in chr_range_list:
         tmp_list[chr(i)] = list(chr_list[chr(i)])
@@ -59,6 +64,12 @@ def print_list(_key):
         print(i, end = " ")
     print("")
 
+# Function 4: Go Backward
+def backward():
+    global chr_list_backward
+    global chr_list
+    chr_list = chr_list_backward
+
 # Main Part
 if __name__ == "__main__":
 
@@ -66,7 +77,8 @@ if __name__ == "__main__":
         print("0. Exit")
         print("1. Edit")
         print("2. Discard")
-        print("3. Query")
+        print("3. Backward")
+        print("4. Query")
         tmp_1 = input("Choose what you want to do: ")
         try:
             tmp_1 = int(tmp_1)
@@ -109,8 +121,13 @@ if __name__ == "__main__":
                     chr_list[_key] = set()
                     print_list(_key)
                     write_file()
-        # Query
+        # Backward
         elif tmp_1 == 3:
+            backward()
+            write_file()
+            print("Backward")
+        # Query
+        elif tmp_1 == 4:
             while 1:
                 _key = input("Input the key: ")
                 if _key == "exit":
