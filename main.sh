@@ -1,19 +1,27 @@
 #!/bin/zsh
 
-# Menu
-echo "Choose Your Option"
-echo "1. Pronounciation Similarity"
-echo "2. Shape Similarity"
-echo -n "Your Option (Index): "
-read option
+result=$(docker images -q --filter "reference=hydrangea-sensiclean" | head -n 1)
 
-# Conduct
-if [ $option -eq 1 ]; then
-    echo "Entering ./pronounciation_similarity/edit.py..."
-    python ./pronounciation_similarity/edit.py
-elif [ $option -eq 2 ]; then
-    echo "Entering ./shape_similarity/edit.py..."
-    python ./shape_similarity/edit.py
+# No Image Found
+if [ "$result" = "" ]; then
+    echo "Docker Image not Found"
+    echo -n "Do you want to build the image now? (Y/N)"
+    read option
+    if [ "$option" = "Y" ] || [ "$option" = "y" ]; then
+        docker build -t hydrangea-sensiclean .
+    else
+        echo "You have canceled to build the image."
+    fi
+# Image Exists    
 else
-    echo "Undefined Option"
+    echo "Image Exists"
+    docker_time=$(docker inspect --format='{{.Created}}' hydrangea-sensiclean | head -n 1)
+    echo "Your image was created at $docker_time."
+    echo -n "Do you want to run the image? (Y/N)"
+    read option
+    if [ "$option" = "Y" ] || [ "$option" = "y" ]; then
+        docker run -i -t $result
+    else
+        echo "You have canceled image running."
+    fi
 fi
